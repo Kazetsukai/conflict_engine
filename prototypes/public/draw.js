@@ -1,4 +1,9 @@
+let ii = 0;
+
 function draw() {
+	ii++;
+	if (ii % 30 != 1) return;
+
 	ctx.clearRect(0, 0, 1024, 768);
 
 	troops.forEach(t => {
@@ -12,9 +17,7 @@ function draw() {
 	});
 	ctx.strokeStyle = 'black';
 
-	let i = 0;
 	shots.forEach(s => {
-		i++;
 		let xa = s.src.x;
 		let ya = s.src.y;
 		let xb = s.trg.x;

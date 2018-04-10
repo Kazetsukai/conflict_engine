@@ -37,7 +37,7 @@ function updateSoldier(unit) {
 }
 
 function decideNextStateSoldier(unit) {
-	var target = troops[Math.random() * troops.length];
+	var target = troops[Math.floor(Math.random() * troops.length)];
 
 	if (target) {
 		if (target.army == unit.army)

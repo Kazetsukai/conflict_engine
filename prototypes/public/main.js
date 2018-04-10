@@ -24,7 +24,7 @@ let troops = [
 	{x: 207, y: 105, army: 1, state: { type: 'idle' }},
 ];
 
-for (var i = 0; i < 10000; i++) {
+for (var i = 0; i < 100000; i++) {
 	let s1 = {x: 275 + Math.random() * 50, y: 150 + Math.random() * 300, army: 0, loaded: true, state: { type: 'idle' } };
 	let s2 = {x: 730 + Math.random() * 50, y: 150 + Math.random() * 300, army: 1, loaded: true, state: { type: 'idle' } };
 
@@ -44,6 +44,8 @@ window.onload = function() {
 	canvas = document.querySelector('#canvas');
 	ctx = canvas.getContext('2d');
 
+	cmd_formUp(0);
+	cmd_formUp(1);
 	gameLoop();
 }
 

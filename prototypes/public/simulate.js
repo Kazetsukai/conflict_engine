@@ -21,8 +21,6 @@ function simulate(delta) {
 
 	troops.forEach(updateSoldier);
 
-	console.log(delta);
-
 	gametick++;
 
 	if (gametick % 100 == 0) {
