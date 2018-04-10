@@ -1,0 +1,27 @@
+let gametick = 0;
+function simulate(delta) {
+	// 
+	shots.forEach(s => {
+		s.dist += s.speed * (delta / 1000);
+
+		let xa = s.src.x;
+		let ya = s.src.y;
+		let xb = s.trg.x;
+		let yb = s.trg.y;
+		let len = Math.sqrt(Math.pow(xb-xa, 2) + Math.pow(yb-ya, 2));
+		if (s.dist - 10 > len) {
+			// Kill
+			troops = troops.filter(t => t !== s.trg);
+			shots = shots.filter(sh => sh !== s);
+			s.trg.dead = true;
+		}
+	});
+
+	troops.forEach(updateSoldier);
+
+	gametick++;
+
+	if (gametick % 100 == 0) {
+		console.log("Remaining units: " + troops.length + "  Shots: " + shots.length + "  Reloading: " + troops.filter(t => t.state.type == "reloading").length);
+	}
+}
