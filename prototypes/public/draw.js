@@ -10,9 +10,11 @@ function draw() {
 			ctx.fillRect(t.x-3, t.y-3, 6, 6);
 		}
 	});
-
 	ctx.strokeStyle = 'black';
+
+	let i = 0;
 	shots.forEach(s => {
+		i++;
 		let xa = s.src.x;
 		let ya = s.src.y;
 		let xb = s.trg.x;
@@ -32,4 +34,5 @@ function draw() {
 		ctx.stroke();
 		ctx.closePath();
 	});
+
 }

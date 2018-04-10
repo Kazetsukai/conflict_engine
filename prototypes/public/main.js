@@ -2,8 +2,8 @@ let ctx;
 let canvas;
 
 let formations = [
-	{x: 125, y: 300, rX: 1, rY: 0, rowSize: 50, rowSpacing: 8, army: 0, soldiers: []},
-	{x: 225, y: 300, rX: -1, rY: 0, rowSize: 54, rowSpacing: 8, army: 1, soldiers: []}
+	{x: 350, y: 400, rX: 1, rY: 0, rowSize: 105, rowSpacing: 5, army: 0, soldiers: []},
+	{x: 700, y: 400, rX: -1, rY: 0, rowSize: 123, rowSpacing: 5, army: 1, soldiers: []}
 ]
 
 let troops = [
@@ -24,9 +24,9 @@ let troops = [
 	{x: 207, y: 105, army: 1, state: { type: 'idle' }},
 ];
 
-for (var i = 0; i < 1000; i++) {
-	let s1 = {x: 100 + Math.random() * 50, y: 150 + Math.random() * 300, army: 0, loaded: true, state: { type: 'idle' } };
-	let s2 = {x: 200 + Math.random() * 50, y: 150 + Math.random() * 300, army: 1, loaded: true, state: { type: 'idle' } };
+for (var i = 0; i < 10000; i++) {
+	let s1 = {x: 275 + Math.random() * 50, y: 150 + Math.random() * 300, army: 0, loaded: true, state: { type: 'idle' } };
+	let s2 = {x: 730 + Math.random() * 50, y: 150 + Math.random() * 300, army: 1, loaded: true, state: { type: 'idle' } };
 
 	troops.push(s1);
 	troops.push(s2);

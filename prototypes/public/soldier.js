@@ -16,7 +16,6 @@ function updateSoldier(unit) {
 			}
 			unit.x = unit.state.tX;
 			unit.y = unit.state.tY;
-			console.log(unit.state.d + "  " + unit.state._len)
 			break;
 
 		case 'aiming':
@@ -38,9 +37,12 @@ function updateSoldier(unit) {
 }
 
 function decideNextStateSoldier(unit) {
-	var target = _.shuffle(troops.filter(t => t.army != unit.army))[0]
+	var target = troops[Math.random() * troops.length];
 
 	if (target) {
+		if (target.army == unit.army)
+			return { type: 'idle' }
+
 		if (unit.loaded) {
 			return {
 				type: 'aiming',
