@@ -1,0 +1,11 @@
+Formation orders
+----------------
+
+'fire:<rank_number>'
+Requires: target, time
+The rank specified should fire a volley at time
+
+'fire_at_will'
+Requires: target
+All units can shoot when they like
+

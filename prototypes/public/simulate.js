@@ -1,5 +1,8 @@
 let gametick = 0;
+let time = 0;
 function simulate(delta) {
+	if (delta > 1000) delta = 0;
+	
 	// 
 	shots.forEach(s => {
 		s.dist += s.speed * (delta / 1000);
@@ -16,14 +19,21 @@ function simulate(delta) {
 		}
 	});
 
-	troops = troops.filter(t => !t.dead);
-	shots = shots.filter(sh => !sh.dead);
+	time += delta;
+	// Tick every 100ms
+	if (time > 100) {
+		time -= 100;
 
-	troops.forEach(updateSoldier);
+		troops = troops.filter(t => !t.dead);
+		shots = shots.filter(sh => !sh.dead);
 
-	gametick++;
+		troops.forEach(updateSoldier);
+		formations.forEach(updateFormation);
 
-	if (gametick % 100 == 0) {
-		console.log("Remaining units: " + troops.length + "  Shots: " + shots.length + "  Reloading: " + troops.filter(t => t.state.type == "reloading").length);
+		gametick++;
+
+		if (gametick % 10 == 0) {
+			console.log("Remaining units: " + troops.length + "  Shots: " + shots.length + "  Reloading: " + troops.filter(t => t.state.type == "reloading").length);
+		}
 	}
 }
