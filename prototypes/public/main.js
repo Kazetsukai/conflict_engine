@@ -26,7 +26,7 @@ for (let j = 0; j < 3; j++) {
 	formations.push({x: 350, y: 200 + j * 400, rX: 1, rY: 0, rowSize: 300, rowSpacing: 1, army: 0, soldiers: [], state: { type: 'idle' }});
 	formations.push({x: 700, y: 200 + j * 400, rX: -1, rY: 0, rowSize: 320, rowSpacing: 1, army: 1, soldiers: [], state: { type: 'idle' }});
 
-	for (let i = 0; i < 1300; i++) {
+	for (let i = 0; i < 500; i++) {
 		let s1 = {x: 275 + Math.random() * 50, y: 150 + Math.random() * 200 + j * 400, army: 0, loaded: true, state: { type: 'idle' } };
 		let s2 = {x: 730 + Math.random() * 50, y: 150 + Math.random() * 200 + j * 400, army: 1, loaded: true, state: { type: 'idle' } };
 
