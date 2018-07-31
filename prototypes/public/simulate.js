@@ -1,7 +1,7 @@
 let gametick = 0;
 let time = 0;
 function simulate(delta) {
-	//if (delta > 1000) delta = 0;
+	if (delta > 1000) delta = 0;
 	
 	// 
 	shots.forEach(s => {
