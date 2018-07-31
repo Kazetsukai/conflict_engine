@@ -2,9 +2,9 @@ let ii = 0;
 
 function draw() {
 	ii++;
-	if (ii % 30 != 1) return;
+	//if (ii % 30 != 1) return;
 
-	ctx.clearRect(0, 0, 1024, 768);
+	ctx.clearRect(0, 0, 1280, 1024);
 
 	troops.forEach(t => {
 		if (t.dead) {
@@ -12,7 +12,7 @@ function draw() {
 			ctx.fillRect(t.x-2, t.y-2, 4, 4);
 		} else {
 			ctx.fillStyle = (t.army == 0 ? 'green' : 'blue');
-			ctx.fillRect(t.x-3, t.y-3, 6, 6);
+			ctx.fillRect(t.x-1, t.y-1, 2, 2);
 		}
 	});
 	ctx.strokeStyle = 'black';

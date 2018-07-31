@@ -2,8 +2,6 @@ let ctx;
 let canvas;
 
 let formations = [
-	{x: 350, y: 400, rX: 1, rY: 0, rowSize: 105, rowSpacing: 5, army: 0, soldiers: []},
-	{x: 700, y: 400, rX: -1, rY: 0, rowSize: 123, rowSpacing: 5, army: 1, soldiers: []}
 ]
 
 let troops = [
@@ -24,15 +22,20 @@ let troops = [
 	{x: 207, y: 105, army: 1, state: { type: 'idle' }},
 ];
 
-for (var i = 0; i < 100000; i++) {
-	let s1 = {x: 275 + Math.random() * 50, y: 150 + Math.random() * 300, army: 0, loaded: true, state: { type: 'idle' } };
-	let s2 = {x: 730 + Math.random() * 50, y: 150 + Math.random() * 300, army: 1, loaded: true, state: { type: 'idle' } };
+for (let j = 0; j < 3; j++) {
+	formations.push({x: 350, y: 200 + j * 400, rX: 1, rY: 0, rowSize: 300, rowSpacing: 1, army: 0, soldiers: [], state: { type: 'idle' }});
+	formations.push({x: 700, y: 200 + j * 400, rX: -1, rY: 0, rowSize: 320, rowSpacing: 1, army: 1, soldiers: [], state: { type: 'idle' }});
 
-	troops.push(s1);
-	troops.push(s2);
+	for (let i = 0; i < 1300; i++) {
+		let s1 = {x: 275 + Math.random() * 50, y: 150 + Math.random() * 200 + j * 400, army: 0, loaded: true, state: { type: 'idle' } };
+		let s2 = {x: 730 + Math.random() * 50, y: 150 + Math.random() * 200 + j * 400, army: 1, loaded: true, state: { type: 'idle' } };
 
-	addSoldierToFormation(s1, formations[0]);
-	addSoldierToFormation(s2, formations[1]);
+		troops.push(s1);
+		troops.push(s2);
+
+		addSoldierToFormation(s1, formations[0 + j*2]);
+		addSoldierToFormation(s2, formations[1 + j*2]);
+	}
 }
 
 let shots = [
@@ -44,8 +47,10 @@ window.onload = function() {
 	canvas = document.querySelector('#canvas');
 	ctx = canvas.getContext('2d');
 
-	cmd_formUp(0);
-	cmd_formUp(1);
+	for (let j = 0; j < formations.length; j++) {
+		cmd_formUp(j);
+	}
+
 	gameLoop();
 }
 

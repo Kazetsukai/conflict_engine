@@ -37,29 +37,49 @@ function updateSoldier(unit) {
 }
 
 function decideNextStateSoldier(unit) {
-	var target = troops[Math.floor(Math.random() * troops.length)];
 
-	if (target) {
-		if (target.army == unit.army)
-			return { type: 'idle' }
+	var action;
+	var targetFormation;
 
-		if (unit.loaded) {
-			return {
-				type: 'aiming',
-				target: target,
-				finishTime: gametick + Math.floor(Math.random() * 300) + 100
-			}
+	if (unit.formation) {
+		if ((unit.formation.order === 'fire_at_will' || unit.formation.order === 'fire:' + unit.rank) && gametick >= unit.formation.time) {
+			action = 'fire';
+			targetFormation = unit.formation.target;
+		}
+	} else {
+		action = 'fire';
+	}
+
+	if (action === 'fire') {
+		var target;
+		if (targetFormation) {
+			target = targetFormation.soldiers[Math.floor(Math.random() * troops.length)];	
 		} else {
-			return {
-				type: 'reloading',
-				finishTime: gametick + 5000 + Math.floor(Math.random() * 500)
+			//target = troops[Math.floor(Math.random() * troops.length)];
+		}
+
+		if (target) {
+			if (target.army == unit.army)
+				return { type: 'idle' }
+
+			if (unit.loaded) {
+				return {
+					type: 'aiming',
+					target: target,
+					finishTime: gametick + Math.floor(Math.random() * 10) + 10
+				}
+			} else {
+				return {
+					type: 'reloading',
+					finishTime: gametick + 300 + Math.floor(Math.random() * 200)
+				}
 			}
 		}
 	}
 
 	return {
 		type: 'waiting',
-		finishTime: gametick + 1000
+		finishTime: gametick + 10
 	}
 }
 
@@ -69,35 +89,4 @@ function addSoldierToFormation(soldier, formation) {
 	}
 	formation.soldiers.push(soldier);
 	soldier.formation = formation;
-}
-
-function cmd_formUp(formationId) {
-	let frm = formations[formationId];
-
-	let rowNum = 0;
-	let rowPos = 0;
-
-	frm.soldiers.forEach(s => {
-		if (s.dead) return;
-		let xTarget = frm.x + rowNum * frm.rowSpacing * -frm.rX;
-		let yTarget = frm.y + (rowPos - frm.rowSize / 2) * frm.rowSpacing;
-		let len = Math.sqrt(Math.pow(xTarget - s.x, 2) + Math.pow(yTarget - s.y, 2));
-
-		s.state = {
-			type: 'moving',
-			sX: s.x,
-			sY: s.y,
-			tX: xTarget,
-			tY: yTarget,
-			d: 0.1 / len,
-			t: 0,
-			_len: len
-		}
-
-		rowPos++;
-		if (rowPos > frm.rowSize) {
-			rowPos = 0;
-			rowNum++;
-		}
-	});
 }
